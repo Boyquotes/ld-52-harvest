@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1reo33a1u1q"]
+
+[ext_resource type="Texture2D" uid="uid://buhbk0lqalk7w" path="res://assets/game_objects/empty/empty.png" id="1_py5f3"]
+
+[node name="empty_town" type="Node2D"]
+
+[node name="Sprite_Empty" type="Sprite2D" parent="."]
+texture = ExtResource("1_py5f3")
+
+[node name="Buildings" type="Node" parent="."]

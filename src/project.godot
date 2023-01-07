@@ -1,0 +1,67 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Node2D",
+"class": &"Building",
+"language": &"GDScript",
+"path": "res://assets/game_objects/building/building.gd"
+}, {
+"base": "Building",
+"class": &"Empty",
+"language": &"GDScript",
+"path": "res://assets/game_objects/empty/empty.gd"
+}]
+_global_script_class_icons={
+"Building": "",
+"Empty": ""
+}
+
+[application]
+
+config/name="harvest"
+run/main_scene="res://scenes/game.tscn"
+config/features=PackedStringArray("4.0", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[custom]
+
+graphics/line_color_on=Color(0.870588, 0.831373, 0.784314, 1)
+graphics/line_color_off=Color(0, 0, 0, 0)
+graphics/line_thickness=3.0
+gameplay/building_hover=NodePath("")
+gameplay/building_select=NodePath("")
+gameplay/buildings_quit=[]
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+mouse_cursor/custom_image="res://assets/ui/ui-arrow-basic.png"
+window/stretch/mode="canvas_items"
+
+[input]
+
+ui_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194321,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+left_mouse={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+]
+}
+
+[rendering]
+
+renderer/rendering_method="mobile"
+renderer/rendering_method.web="mobile"
