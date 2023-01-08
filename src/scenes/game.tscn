@@ -1,9 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://drhm05kil6jj0"]
+[gd_scene load_steps=31 format=3 uid="uid://drhm05kil6jj0"]
 
 [ext_resource type="Script" path="res://assets/game_objects/camera/camera.gd" id="1_ek21h"]
 [ext_resource type="Script" path="res://scripts/mouse.gd" id="1_ikwiy"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_otthy"]
 [ext_resource type="PackedScene" uid="uid://by15vcsccwjr" path="res://assets/graphics/background.tscn" id="2_6upci"]
 [ext_resource type="PackedScene" uid="uid://dbxffv6mxkqtd" path="res://assets/game_objects/empty_town/empty_town.tscn" id="2_xqc5c"]
+[ext_resource type="Script" path="res://scripts/time.gd" id="5_1vhgg"]
+[ext_resource type="PackedScene" uid="uid://big2easy8r0rb" path="res://assets/game_objects/townhall/townhall.tscn" id="5_domnf"]
+[ext_resource type="PackedScene" uid="uid://bqwj5xarhr13s" path="res://assets/game_objects/farm/farm.tscn" id="5_pmkk5"]
+[ext_resource type="Theme" uid="uid://byemipvf2gw5c" path="res://assets/themes/theme.tres" id="6_170bn"]
+[ext_resource type="PackedScene" uid="uid://dq4hkopcu5m1x" path="res://assets/game_objects/window/window.tscn" id="6_ijwbj"]
+[ext_resource type="Script" path="res://scripts/ui_header.gd" id="7_suc46"]
+[ext_resource type="Texture2D" uid="uid://br7g84224arn" path="res://assets/ui/icon-food.png" id="8_huvdc"]
+[ext_resource type="Texture2D" uid="uid://bqovk2iyxe516" path="res://assets/ui/icon-money.png" id="9_q0ij8"]
+[ext_resource type="Texture2D" uid="uid://enxu8qla5vb6" path="res://assets/ui/icon-dead.png" id="10_2b8hh"]
+[ext_resource type="Texture2D" uid="uid://cyu020y80styp" path="res://assets/ui/icon-fertilizer.png" id="11_twwli"]
+[ext_resource type="Texture2D" uid="uid://devp55wolefdf" path="res://assets/ui/icon-people.png" id="12_j1vpt"]
+[ext_resource type="Texture2D" uid="uid://6hwtraegd07o" path="res://assets/ui/icon-day.png" id="13_7ts64"]
 
 [sub_resource type="Shader" id="Shader_ce4lb"]
 resource_local_to_scene = true
@@ -29,7 +42,7 @@ void fragment() {
 	COLOR = mix(color, line_color, outline - color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqkqp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rdpl6"]
 resource_local_to_scene = true
 shader = SubResource("Shader_ce4lb")
 shader_parameter/line_color = Color(1, 1, 1, 0)
@@ -59,7 +72,7 @@ void fragment() {
 	COLOR = mix(color, line_color, outline - color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjtgf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_323x6"]
 resource_local_to_scene = true
 shader = SubResource("Shader_mtwqh")
 shader_parameter/line_color = Color(1, 1, 1, 0)
@@ -89,7 +102,7 @@ void fragment() {
 	COLOR = mix(color, line_color, outline - color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dylh1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_422n0"]
 resource_local_to_scene = true
 shader = SubResource("Shader_62rfh")
 shader_parameter/line_color = Color(1, 1, 1, 0)
@@ -119,47 +132,139 @@ void fragment() {
 	COLOR = mix(color, line_color, outline - color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojety"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8o11v"]
 resource_local_to_scene = true
 shader = SubResource("Shader_wtxjx")
 shader_parameter/line_color = Color(1, 1, 1, 0)
 shader_parameter/line_thickness = 0.0
 
+[sub_resource type="Animation" id="Animation_8nbe8"]
+resource_name = "Day_to_Night"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Time_System/../Game_Canvas:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.0431373, 0.329412, 0.447059, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3or1m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera/UI_CanvasLayer/Day_Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1920, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Time_System/../Game_Canvas:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4j42t"]
+resource_name = "Night_to_Day"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Time_System/../Game_Canvas:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(0.0431373, 0.329412, 0.447059, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wobhk"]
+resource_name = "Night"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera/UI_CanvasLayer/Day_Label:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(-1920, 0), Vector2(0, 0), Vector2(0, 0), Vector2(1920, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47n4p"]
+_data = {
+"Day_to_Night": SubResource("Animation_8nbe8"),
+"Night": SubResource("Animation_wobhk"),
+"Night_to_Day": SubResource("Animation_4j42t"),
+"RESET": SubResource("Animation_3or1m")
+}
+
 [node name="Game" type="Node"]
+script = ExtResource("1_otthy")
 
 [node name="Mouse" type="Node" parent="."]
 script = ExtResource("1_ikwiy")
 
 [node name="UI_Group" type="Node" parent="."]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="Game_Canvas" type="CanvasModulate" parent="."]
 
-[node name="Background" parent="CanvasModulate" instance=ExtResource("2_6upci")]
+[node name="Background" parent="Game_Canvas" node_paths=PackedStringArray("camera") instance=ExtResource("2_6upci")]
 unique_name_in_owner = true
+position = Vector2(-11, 1)
+camera = NodePath("../../Camera")
 
-[node name="Peoples" type="Node" parent="CanvasModulate"]
+[node name="Peoples" type="Node2D" parent="Game_Canvas"]
 
-[node name="Town_Buildings" type="Node" parent="CanvasModulate"]
+[node name="Town_Buildings" type="Node2D" parent="Game_Canvas"]
 
-[node name="empty_town" parent="CanvasModulate/Town_Buildings" instance=ExtResource("2_xqc5c")]
-material = SubResource("ShaderMaterial_iqkqp")
-position = Vector2(1483, 483)
+[node name="empty_town" parent="Game_Canvas/Town_Buildings" instance=ExtResource("2_xqc5c")]
+material = SubResource("ShaderMaterial_rdpl6")
+position = Vector2(1373, 446)
 
-[node name="empty_town2" parent="CanvasModulate/Town_Buildings" instance=ExtResource("2_xqc5c")]
-material = SubResource("ShaderMaterial_tjtgf")
-position = Vector2(1685, 283)
+[node name="empty_town2" parent="Game_Canvas/Town_Buildings" instance=ExtResource("2_xqc5c")]
+material = SubResource("ShaderMaterial_323x6")
+position = Vector2(1625, 300)
 
-[node name="empty_town3" parent="CanvasModulate/Town_Buildings" instance=ExtResource("2_xqc5c")]
-material = SubResource("ShaderMaterial_dylh1")
-position = Vector2(1504, 686)
+[node name="empty_town3" parent="Game_Canvas/Town_Buildings" instance=ExtResource("2_xqc5c")]
+material = SubResource("ShaderMaterial_422n0")
+position = Vector2(1369, 754)
 
-[node name="empty_town4" parent="CanvasModulate/Town_Buildings" instance=ExtResource("2_xqc5c")]
-material = SubResource("ShaderMaterial_ojety")
-position = Vector2(1708, 879)
+[node name="empty_town4" parent="Game_Canvas/Town_Buildings" instance=ExtResource("2_xqc5c")]
+material = SubResource("ShaderMaterial_8o11v")
+position = Vector2(1633, 931)
 
-[node name="Land_Buildings" type="Node" parent="CanvasModulate"]
+[node name="Farm" parent="Game_Canvas/Town_Buildings" instance=ExtResource("5_pmkk5")]
+position = Vector2(1165, 959)
+output_done = 0
+
+[node name="Land_Buildings" type="Node2D" parent="Game_Canvas"]
+
+[node name="Townhall" parent="Game_Canvas" instance=ExtResource("5_domnf")]
+position = Vector2(1642, 686)
 
 [node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 anchor_mode = 0
 current = true
 limit_left = 0
@@ -169,6 +274,228 @@ limit_bottom = 1080
 limit_smoothed = true
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
 script = ExtResource("1_ek21h")
 speed = 2000.0
 mouse_center_area = 1600.0
+
+[node name="UI_CanvasLayer" type="CanvasLayer" parent="Camera"]
+layer = 2
+
+[node name="Day_Label" type="Label" parent="Camera/UI_CanvasLayer"]
+unique_name_in_owner = true
+show_behind_parent = true
+offset_left = -1920.0
+offset_bottom = 1080.0
+theme_override_font_sizes/font_size = 200
+text = "DAY 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI_Header" type="HBoxContainer" parent="Camera/UI_CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 64.0
+theme = ExtResource("6_170bn")
+alignment = 1
+script = ExtResource("7_suc46")
+
+[node name="HBox_Food" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 426.0
+offset_right = 512.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="L_Food" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Food"]
+unique_name_in_owner = true
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="TR_Food" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Food"]
+offset_left = 22.0
+offset_right = 86.0
+offset_bottom = 64.0
+texture = ExtResource("8_huvdc")
+stretch_mode = 4
+
+[node name="VSeparator3" type="VSeparator" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 516.0
+offset_right = 566.0
+offset_bottom = 64.0
+
+[node name="HBox_Money" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 570.0
+offset_right = 656.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="L_Money" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Money"]
+unique_name_in_owner = true
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="TR_Money" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Money"]
+offset_left = 22.0
+offset_right = 86.0
+offset_bottom = 64.0
+texture = ExtResource("9_q0ij8")
+stretch_mode = 4
+
+[node name="VSeparator5" type="VSeparator" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 660.0
+offset_right = 710.0
+offset_bottom = 64.0
+
+[node name="HBox_Dead" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 714.0
+offset_right = 800.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="L_Dead" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Dead"]
+unique_name_in_owner = true
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="TR_Dead" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Dead"]
+offset_left = 22.0
+offset_right = 86.0
+offset_bottom = 64.0
+texture = ExtResource("10_2b8hh")
+stretch_mode = 4
+
+[node name="VSeparator6" type="VSeparator" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 804.0
+offset_right = 854.0
+offset_bottom = 64.0
+
+[node name="HBox_Fertilizer" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 858.0
+offset_right = 944.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="L_Fertilizer" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Fertilizer"]
+unique_name_in_owner = true
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="TR_Fertilizer" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Fertilizer"]
+offset_left = 22.0
+offset_right = 86.0
+offset_bottom = 64.0
+texture = ExtResource("11_twwli")
+stretch_mode = 4
+
+[node name="VSeparator4" type="VSeparator" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 948.0
+offset_right = 998.0
+offset_bottom = 64.0
+
+[node name="HBox_People" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 1002.0
+offset_right = 1270.0
+offset_bottom = 64.0
+alignment = 2
+
+[node name="L_Title_People" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_People"]
+offset_top = 8.0
+offset_right = 122.0
+offset_bottom = 56.0
+text = "People :"
+
+[node name="L_People" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_People"]
+unique_name_in_owner = true
+offset_left = 126.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="L_Sep_People" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_People"]
+offset_left = 148.0
+offset_top = 8.0
+offset_right = 160.0
+offset_bottom = 56.0
+text = "/"
+
+[node name="L_Max_People" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_People"]
+unique_name_in_owner = true
+offset_left = 164.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 56.0
+text = "15"
+
+[node name="TR_People" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_People"]
+offset_left = 204.0
+offset_right = 268.0
+offset_bottom = 64.0
+texture = ExtResource("12_j1vpt")
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 1274.0
+offset_right = 1324.0
+offset_bottom = 64.0
+
+[node name="HBox_Day" type="HBoxContainer" parent="Camera/UI_CanvasLayer/UI_Header"]
+offset_left = 1328.0
+offset_right = 1494.0
+offset_bottom = 64.0
+alignment = 2
+
+[node name="L_Title_Day" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Day"]
+offset_top = 8.0
+offset_right = 76.0
+offset_bottom = 56.0
+text = "Day :"
+
+[node name="L_Day" type="Label" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Day"]
+unique_name_in_owner = true
+offset_left = 80.0
+offset_top = 8.0
+offset_right = 98.0
+offset_bottom = 56.0
+text = "0"
+
+[node name="TR_Day" type="TextureRect" parent="Camera/UI_CanvasLayer/UI_Header/HBox_Day"]
+offset_left = 102.0
+offset_right = 166.0
+offset_bottom = 64.0
+texture = ExtResource("13_7ts64")
+stretch_mode = 4
+
+[node name="Window" parent="Camera/UI_CanvasLayer" instance=ExtResource("6_ijwbj")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Time_System" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_1vhgg")
+
+[node name="Timer_Day" type="Timer" parent="Time_System"]
+unique_name_in_owner = true
+wait_time = 30.0
+one_shot = true
+
+[node name="Timer_Night" type="Timer" parent="Time_System"]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="Time_Anim" type="AnimationPlayer" parent="Time_System"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_47n4p")
+}

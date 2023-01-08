@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq4hkopcu5m1x"]
+
+[ext_resource type="Theme" uid="uid://byemipvf2gw5c" path="res://assets/themes/theme.tres" id="1_4ild3"]
+[ext_resource type="Script" path="res://assets/game_objects/window/window.gd" id="2_pdegn"]
+[ext_resource type="Texture2D" uid="uid://cyu020y80styp" path="res://assets/ui/icon-fertilizer.png" id="6_21r8t"]
+
+[node name="Window" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 100.0
+theme = ExtResource("1_4ild3")
+script = ExtResource("2_pdegn")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 342.0
+color = Color(0.0941176, 0.117647, 0.156863, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 342.0
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TOWNHALL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Action" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sell
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+texture = ExtResource("6_21r8t")

@@ -9,13 +9,16 @@
 material = ExtResource("2_2xmm2")
 use_parent_material = true
 script = ExtResource("2_p8wr0")
+buildings_list = [{
+"icon_path": "res://assets/ui/icon-food.png",
+"name": "farm",
+"price": 50
+}]
 
-[node name="Sprite_Empty" type="TextureRect" parent="."]
+[node name="Sprite" type="TextureRect" parent="."]
 material = ExtResource("2_2xmm2")
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
 texture = ExtResource("1_8n1j3")
 script = ExtResource("4_83wri")
-
-[node name="Buildings" type="Node" parent="."]

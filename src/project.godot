@@ -15,12 +15,18 @@ _global_script_classes=[{
 "path": "res://assets/game_objects/building/building.gd"
 }, {
 "base": "Building",
+"class": &"BuildingProduction",
+"language": &"GDScript",
+"path": "res://assets/game_objects/building_production/building_production.gd"
+}, {
+"base": "Building",
 "class": &"Empty",
 "language": &"GDScript",
 "path": "res://assets/game_objects/empty/empty.gd"
 }]
 _global_script_class_icons={
 "Building": "",
+"BuildingProduction": "",
 "Empty": ""
 }
 
@@ -38,6 +44,13 @@ graphics/line_color_off=Color(0, 0, 0, 0)
 graphics/line_thickness=3.0
 gameplay/building_hover=NodePath("")
 gameplay/building_select=NodePath("")
+variables/day=0
+variables/food=0
+variables/people=0
+variables/money=200
+variables/dead_body=0
+variables/fertilizer=0
+variables/max_people=0
 gameplay/buildings_quit=[]
 
 [display]

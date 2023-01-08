@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://byemipvf2gw5c"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ybfol"]
+color = Color(0.870588, 0.831373, 0.784314, 1)
+thickness = 10
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otvmt"]
+bg_color = Color(0.0941176, 0.117647, 0.156863, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 6.0
+expand_margin_top = 30.0
+expand_margin_right = 6.0
+expand_margin_bottom = 6.0
+
+[resource]
+Label/colors/font_color = Color(0.870588, 0.831373, 0.784314, 1)
+Label/colors/font_outline_color = Color(0.0941176, 0.117647, 0.156863, 1)
+Label/font_sizes/font_size = 32
+VSeparator/constants/separation = 50
+VSeparator/styles/separator = SubResource("StyleBoxLine_ybfol")
+Window/styles/embedded_border = SubResource("StyleBoxFlat_otvmt")

@@ -10,10 +10,7 @@ var viewport_width = ProjectSettings.get("display/window/size/viewport_width")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var Background = %Background
-	background_width = Background.get_width()
-	limit_right = background_width
-	
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

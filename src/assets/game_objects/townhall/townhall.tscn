@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://big2easy8r0rb"]
+[gd_scene load_steps=5 format=3 uid="uid://big2easy8r0rb"]
+
+[ext_resource type="Script" path="res://assets/game_objects/townhall/townhall.gd" id="1_2txnc"]
+[ext_resource type="Material" uid="uid://bpa6lqp5whglh" path="res://assets/materials/outline.tres" id="1_ti2vg"]
+[ext_resource type="Script" path="res://assets/materials/outline.gd" id="3_advec"]
+[ext_resource type="Texture2D" uid="uid://di6pxtgsvkju8" path="res://assets/game_objects/townhall/townhall.png" id="3_vccy4"]
 
 [node name="Townhall" type="Node2D"]
+script = ExtResource("1_2txnc")
+
+[node name="Sprite" type="TextureRect" parent="."]
+material = ExtResource("1_ti2vg")
+offset_left = -124.0
+offset_top = -248.0
+offset_right = 124.0
+texture = ExtResource("3_vccy4")
+script = ExtResource("3_advec")
+
+[node name="Buildings" type="Node" parent="."]

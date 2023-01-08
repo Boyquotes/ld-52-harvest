@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqwj5xarhr13s"]
+
+[ext_resource type="Script" path="res://assets/game_objects/farm/farm.gd" id="1_oa8wc"]
+[ext_resource type="Material" uid="uid://bpa6lqp5whglh" path="res://assets/materials/outline.tres" id="2_1pmmn"]
+[ext_resource type="Texture2D" uid="uid://cu6ur3hh5ywhg" path="res://assets/game_objects/farm/farm.png" id="3_curjs"]
+[ext_resource type="Script" path="res://assets/materials/outline.gd" id="4_ewqol"]
+[ext_resource type="Theme" uid="uid://byemipvf2gw5c" path="res://assets/themes/theme.tres" id="5_32n0q"]
+
+[sub_resource type="Animation" id="Animation_j6p67"]
+resource_name = "production_done"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_Production:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label_Production:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(24, -128), Vector2(24, -256)]
+}
+
+[sub_resource type="Animation" id="Animation_d474e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label_Production:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label_Production:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, -128)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tu8ck"]
+_data = {
+"RESET": SubResource("Animation_d474e"),
+"production_done": SubResource("Animation_j6p67")
+}
+
+[node name="Farm" type="Node2D"]
+script = ExtResource("1_oa8wc")
+output_name = "food"
+output_done = 25
+time_needed = 15.0
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[node name="Sprite" type="TextureRect" parent="."]
+material = ExtResource("2_1pmmn")
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+texture = ExtResource("3_curjs")
+script = ExtResource("4_ewqol")
+
+[node name="Label_Production" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -128.0
+offset_right = 78.0
+offset_bottom = -80.0
+grow_vertical = 0
+theme = ExtResource("5_32n0q")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_tu8ck")
+}
